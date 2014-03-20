@@ -1,8 +1,0 @@
-.max-chars-label {
-	font-size: 90%;
-	font-weight: bold;
-}
-
-.max-chars-label.invalid {
-	color: #C00;
-}
