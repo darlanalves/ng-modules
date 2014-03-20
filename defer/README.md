@@ -31,7 +31,7 @@ app.service('AuthService', function(deferred) {
 
 	return {
 		// ...
-		getCurrentProfile: function(id) {
+		getCurrentProfile: function() {
 			return deferred(loggedProfile);
 		}
 	};
