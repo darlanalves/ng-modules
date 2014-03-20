@@ -1,6 +1,7 @@
-# ng Micro-modules
+# AngularJS Micro-modules
 
-Coleção de módulos reusáveis para AngularJS.
+Collection of AngularJS micro-modules to perform common frontend tasks
 
 - [maxChars](https://raw.github.com/darlanalves/ng-modules/master/max-chars/maxChars.js)
 - [defer](https://raw.github.com/darlanalves/ng-modules/master/defer/defer.js)
+- [CPF](https://raw.github.com/darlanalves/ng-modules/master/CPF/CPF.js)
