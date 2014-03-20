@@ -19,7 +19,7 @@ app.controller('SignupController', ['$scope', 'CPF', function($scope, CPF) {
 			return false;
 		}
 	};
-}]
+}]);
 
 ```
 
