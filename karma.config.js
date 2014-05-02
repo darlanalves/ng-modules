@@ -1,10 +1,12 @@
 module.exports = function(config) {
 	var files = [
 		'vendor/angular.js',
+		'vendor/angular-mocks.js',
+		'vendor/matchers.js',
 
 		'html-outline/src/module.js',
 		'html-outline/src/*.js',
-		'html-outline/default-rules.js',
+		'html-outline/rules/*.js',
 		'html-outline/test/*Spec.js'
 	];
 
