@@ -1,16 +1,14 @@
-(function() {
+(function(window) {
 
-	/**
-	 * @author Darlan Alves <darlan@moovia.com>
-	 * @param {String} target 	CSS selector to find the scroll point
-	 * @param {Number} offset 	Optional scroll ofset
-	 * @example
-	 * 		scrollTo('#some-element', 50);
-	 */
-	function scrollTo(target, offset, isWindow, window_) {
+	function scrollTo(target, offset) {
+		target = target || window;
+		internalScrollTo(target, offset | 0, window === target);
+	}
+
+	function internalScrollTo(target, offset, isWindow, window_) {
 		if (!target) return;
 
-		isWindow = !! isWindow;
+		isWindow = !!isWindow;
 		offset = offset | 0;
 
 		var $target = $(target),
@@ -48,10 +46,6 @@
 		scroll();
 	}
 
-	/**
-	 * @example
-	 * 		<button scroll-to="#some-element">go to XXX</button>
-	 */
 	function scrollToDirective($window) {
 		return {
 			restrict: 'A',
@@ -60,7 +54,7 @@
 					target = isWindow ? $window : $attrs.scrollTo;
 
 				$element.click(function() {
-					scrollTo(target, +$attrs.offset || 0, isWindow, $window);
+					internalScrollTo(target, +$attrs.offset || 0, isWindow, $window);
 				});
 			}
 		};
@@ -69,4 +63,4 @@
 	angular.module('scrollTo', [])
 		.directive('scrollTo', ['$window', scrollToDirective])
 		.value('scrollTo', scrollTo);
-})();
+})(window);
