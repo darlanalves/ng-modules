@@ -1,5 +1,9 @@
 # Bootstrap (or not) pagination
 
+## Code
+
+- [Download it here](https://raw.github.com/darlanalves/ng-modules/master/pagination/pagination.js)
+
 ## How to
 
 ```
@@ -33,7 +37,7 @@ function Controller ($scope, PaginatedList) {
 
 ## Dependencies
 
-The module uses two other tiny libs:
+The module uses two other tiny libs o'mine:
 
 - [EventEmitter](https://raw.github.com/darlanalves/EventEmitter)
 - [extends](https://raw.github.com/darlanalves/extends)

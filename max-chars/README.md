@@ -13,3 +13,6 @@ The HTML piece above will be turned into:
 <span class="max-chars-label invalid">72 / 60</span>
 <!-- the "invalid" class is added when the char count exceeds the limit -->
 ```
+
+## Code
+[Download it here](https://raw.github.com/darlanalves/ng-modules/master/max-chars/maxChars.js)

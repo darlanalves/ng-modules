@@ -2,6 +2,9 @@
 
 Injectable convenience methods to make resolved/rejected promises
 
+## Code
+[Download it here](https://raw.github.com/darlanalves/ng-modules/master/defer/defer.js)
+
 ## Usage
 
 ```js

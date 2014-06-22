@@ -2,6 +2,9 @@
 
 Validates Brazilian CPF numbers (service & directive)
 
+## Code
+- [Download it here](https://raw.github.com/darlanalves/ng-modules/master/CPF/CPF.js)
+
 ### Service
 
 ```js
