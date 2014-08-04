@@ -8,14 +8,20 @@ describe('CPF validation', function() {
 
 		it('should return true for valid values', inject(function(CPF) {
 			validValues.forEach(function(value) {
-				expect(CPF.isValid(value)).toBe(true);
+				expect(CPF.check(value)).toBe(true);
 			});
 		}));
 
-		it('should return false', inject(function(CPF) {
+		it('should return false for invalid values', inject(function(CPF) {
 			invalidValues.forEach(function(value) {
-				expect(CPF.isValid(value)).toBe(false);
+				expect(CPF.check(value)).toBe(false);
 			});
+		}));
+
+		it('should generate a valid identity', inject(function(CPF) {
+			var cpf = CPF.generate();
+
+			expect(CPF.check(cpf)).toBe(true);
 		}));
 	});
 });

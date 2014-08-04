@@ -24,6 +24,7 @@ angular.module('CPF', [])
 
 			return mod;
 		}
+
 		/**
 		 * Validates a given users' "CPF" code
 		 * @param {String} identity
@@ -40,14 +41,12 @@ angular.module('CPF', [])
 
 			sum = getSumThroughPosition(identity, 9);
 			mod = getModulusForSum(sum);
-
 			if (!checkModulusAtPosition(identity, mod, 9)) {
 				return false;
 			}
 
 			sum = getSumThroughPosition(identity, 10);
 			mod = getModulusForSum(sum);
-
 			if (!checkModulusAtPosition(identity, mod, 10)) {
 				return false;
 			}
@@ -55,8 +54,27 @@ angular.module('CPF', [])
 			return true;
 		}
 
+		function leftPadZeros(string) {
+			if (string.length === 9) return string;
+
+			return Array(9 - string.length).join('0') + string;
+		}
+
+		function generate() {
+			var sum, identity = leftPadZeros(String(Math.floor(Math.random() * 999999999)));
+
+			sum = getSumThroughPosition(identity, 9);
+			identity += getModulusForSum(sum);
+
+			sum = getSumThroughPosition(identity, 10);
+			identity += getModulusForSum(sum);
+
+			return identity;
+		}
+
 		return {
-			isValid: validateCPF
+			check: validateCPF,
+			generate: generate
 		};
 	})
 
@@ -70,23 +88,26 @@ angular.module('CPF', [])
 
 				function validate(ngModel, validatorName, validity, value) {
 					ngModel.$setValidity(validatorName, validity);
-					return validity ? value : undefined;
+					// return validity ? value : undefined;
+					return value;
 				}
 
 				function validateValue(value) {
-					return validate(ngModel, '', ngModel.$isEmpty(value) || CPF.isValid(value), value);
+					return validate(ngModel, '', ngModel.$isEmpty(value) || CPF.check(value), value);
 				}
 
 				function validateMinLength(value) {
-					return validate(ngModel, 'minlength', ngModel.$isEmpty(value) || value.length >= 11, value);
+					return validate(ngModel, 'minlength', String(value || '').length === 11, value);
 				}
 
-				function validateMaxLength(value) {
-					return validate(ngModel, 'maxlength', ngModel.$isEmpty(value) || value.length <= 14, value);
+				var nonDigitRe = /\D+/g;
+
+				function cleanupDigits(value) {
+					return String(value).replace(nonDigitRe, '');
 				}
 
-				ngModel.$formatters.push(validateMinLength, validateMaxLength, validateValue);
-				ngModel.$parsers.push(validateMinLength, validateMaxLength, validateValue);
+				ngModel.$formatters.push(cleanupDigits, validateMinLength, validateValue);
+				ngModel.$parsers.push(cleanupDigits, validateMinLength, validateValue);
 			}
 		};
 	}
