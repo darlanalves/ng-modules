@@ -29,7 +29,8 @@
 	angular.module('angular-bugsnag', ['async-script']).provider('Bugsnag',
 		function() {
 			var scriptUrl = 'http://d2wy8f7a9ursnm.cloudfront.net/bugsnag-2.min.js',
-				apiKey = '';
+				apiKey = '',
+				enabled = true;
 
 			/**
 			 * Changes the scriptUrl that provides Bugsnag
@@ -43,6 +44,10 @@
 			 */
 			this.setApiKey = function(key) {
 				apiKey = key;
+			};
+
+			this.setEnabled = function(bValue) {
+				enabled = !!bValue;
 			};
 
 			function configure(config) {
@@ -67,6 +72,8 @@
 
 			this.$get = ['loadScriptAsync', '$window',
 				function(loadScriptAsync, $window) {
+					if (!enabled) return $bugsnag;
+
 					loadScriptAsync(scriptUrl).then(function() {
 						if (!$window.Bugsnag) {
 							return;
